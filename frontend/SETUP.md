@@ -7,6 +7,24 @@ This guide will help you set up and run the Smart Lab Management frontend projec
 - npm (comes with Node.js)
 - Git (optional, for cloning from a repository)
 
+## Installation Instructions
+
+### 1. Install Node.js and npm
+- Download and install Node.js from [nodejs.org](https://nodejs.org/)
+- npm is included with Node.js
+- Verify installation:
+  ```
+  node -v
+  npm -v
+  ```
+
+### 2. (Optional) Install Git
+- Download and install Git from [git-scm.com](https://git-scm.com/)
+- Verify installation:
+  ```
+  git --version
+  ```
+
 ## Step-by-Step Setup
 
 ### 1. Clone the Repository (if using Git)
