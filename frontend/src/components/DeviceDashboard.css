@@ -1,0 +1,128 @@
+.device-dashboard-bg {
+  background: linear-gradient(135deg, #23272f 0%, #23272f 60%, #23272f 100%);
+  min-height: 100vh;
+  padding: 0 0 64px 0;
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  color: #23272f;
+}
+.device-dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 48px 64px 0 64px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.device-dashboard-header h1 {
+  font-size: 2.6em;
+  font-weight: 800;
+  color: #f7fafc;
+  margin-bottom: 0.2em;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px #23272f;
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+}
+.device-dashboard-subtitle {
+  font-size: 1.15em;
+  color: #f7fafc;
+  opacity: 0.7;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+.device-dashboard-refresh {
+  background: #4F8DFD;
+  color: #fff;
+  font-size: 1.1em;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(3, 124, 245, 0.8);
+  transition: background 0.2s;
+}
+.device-dashboard-refresh:hover {
+  background: #2DE3A7;
+  color: #23272f;
+}
+.refresh-icon {
+  font-size: 1.3em;
+  animation: rotate 1.2s linear infinite;
+}
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.device-dashboard-cards {
+  display: flex;
+  gap: 32px;
+  justify-content: flex-start;
+  padding: 48px 64px 0 64px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.device-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(44,62,80,0.10);
+  padding: 32px 36px;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: box-shadow 0.2s, background 0.2s;
+  border: 1.5px solid #e5e7eb;
+}
+.device-card:hover {
+  box-shadow: 0 8px 32px rgba(44,62,80,0.18);
+  background: #f7fafc;
+  border-color: #4F8DFD;
+}
+.device-card-title {
+  font-size: 1.15em;
+  font-weight: 700;
+  color: #23272f;
+  margin-bottom: 18px;
+  letter-spacing: 0.5px;
+}
+.device-card-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.device-card-icon {
+  font-size: 2.2em;
+  opacity: 0.9;
+}
+.device-card-icon.total {
+  color: #4F8DFD;
+}
+.device-card-icon.online {
+  color: #22c55e;
+}
+.device-card-icon.warning {
+  color: #FFD600;
+}
+.device-card-icon.critical {
+  color: #ef4444;
+}
+.device-card-value {
+  font-size: 1.7em;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+.device-card-value.total {
+  color: #23272f;
+}
+.device-card-value.online {
+  color: #22c55e;
+}
+.device-card-value.warning {
+  color: #FFD600;
+}
+.device-card-value.critical {
+  color: #ef4444;
+}

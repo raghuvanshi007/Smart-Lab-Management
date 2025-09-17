@@ -1,0 +1,310 @@
+.animated-fadein {
+  animation: fadeInUp 0.8s cubic-bezier(.68,-0.55,.27,1.55) both;
+}
+.animated-title {
+  animation: fadeInUp 1.1s cubic-bezier(.68,-0.55,.27,1.55) both;
+}
+.animated-subtitle {
+  animation: fadeInUp 1.4s cubic-bezier(.68,-0.55,.27,1.55) both;
+}
+.animated-btn {
+  animation: fadeInUp 1.7s cubic-bezier(.68,-0.55,.27,1.55) both;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.animated-btn:hover {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 4px 24px #4F8DFD;
+}
+.animated-card {
+  animation: fadeInUp 0.8s cubic-bezier(.68,-0.55,.27,1.55) both;
+}
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.main-title-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 8px;
+}
+.partner-logos-collage {
+  position: static;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0;
+  min-height: 48px;
+}
+.partner-logos-collage {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  position: absolute;
+  top: 90px;
+  right: 48px;
+  z-index: 10;
+  min-height: 64px;
+}
+.collage-logo-block {
+  position: relative;
+  margin-left: -32px;
+  margin-right: 0;
+  margin-bottom: 0;
+  transition: z-index 0.2s;
+}
+.collage-logo {
+  height: 64px;
+  width: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(44,62,80,0.18);
+  background: none;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.3s;
+}
+@keyframes logoFadeIn {
+  0% { opacity: 0; transform: scale(0.7) translateY(-40px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+.partner-logos-side-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 24px;
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  z-index: 2;
+}
+.landing-dashboard {
+  background: #0a1622;
+  color: #f7fafc;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 48px 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+.landing-logo-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  background: none;
+}
+.landing-logo {
+  height: 40px;
+  margin-right: 12px;
+  filter: brightness(1.7) drop-shadow(0 2px 8px #0a1622);
+  background: none;
+}
+.landing-logo-title {
+  font-size: 2.2em;
+  font-weight: 700;
+  color: #f7fafc;
+  letter-spacing: 0.5px;
+}
+.landing-main-title {
+  font-size: 2.2em;
+  font-weight: 700;
+  color: #f7fafc;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.landing-subtitle {
+  font-size: 1.2em;
+  color: #8ca0b3;
+  margin-bottom: 18px;
+  text-align: center;
+}
+.dashboard-header {
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 32px;
+  text-align: center;
+  padding-left: 0;
+}
+.dashboard-header h1 {
+  font-size: 2.8em;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #fff;
+}
+.dashboard-header p {
+  font-size: 1.2em;
+  color: #8ca0b3;
+  margin-bottom: 18px;
+}
+.partner-logos {
+  display: flex;
+  gap: 32px;
+  margin-top: 8px;
+  align-items: center;
+}
+.partner-logos-side {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  margin: 18px 0 32px 0;
+  min-height: 60px;
+}
+.partner-logo {
+  height: 48px;
+  width: auto;
+  margin-right: 24px;
+  filter: none;
+  background: none;
+  border-radius: 8px;
+  object-fit: contain;
+  display: inline-block;
+}
+.amd-logo {
+  background: none;
+  filter: none;
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  display: inline-block;
+}
+.intel-logo {
+  filter: none;
+}
+.nvidia-logo {
+  background: #bcee09;
+  border-radius: 4px;
+  padding: 2px 8px;
+  height: 32px !important;
+}
+.qualcomm-logo {
+  filter: none;
+}
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 32px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.dashboard-card {
+  background: #101a2b;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(44,62,80,0.10);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 180px;
+  border: 1px solid #23272f;
+}
+.card-title {
+  font-size: 1.2em;
+
+  .partner-logos-side-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 24px;
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    z-index: 2;
+  }
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+}
+.pie-label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.4em;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 2px 8px #23272f;
+}
+.health-list {
+  margin-top: 8px;
+}
+.health-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1em;
+  margin-bottom: 8px;
+  color: #fff;
+}
+.health-icon {
+  font-size: 2em;
+  color: #7FBA00;
+  margin-right: 8px;
+}
+.health-icon-large {
+  font-size: 2.8em;
+  color: #bcee09;
+}
+.health-text {
+  font-size: 1.1em;
+  font-weight: 500;
+}
+.health-date {
+  color: #8ca0b3;
+  font-size: 0.95em;
+  margin-top: 0;
+}
+.ai-brain-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+}
+.ai-brain-icon {
+  font-size: 5em;
+  color: #4F8DFD;
+}
+.health-status-block {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: #181a20;
+  border-radius: 12px;
+  padding: 18px 24px;
+  margin-bottom: 12px;
+}
+.dashboard-enter-btn {
+  margin-top: 32px;
+  padding: 16px 48px;
+  font-size: 1.3em;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(90deg, #4F8DFD 0%, #bcee09 100%);
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(44,62,80,0.18);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.dashboard-enter-btn:hover {
+  background: linear-gradient(90deg, #bcee09 0%, #4F8DFD 100%);
+  transform: translateY(-2px) scale(1.04);
+}
+.monochrome-logo {
+  filter: brightness(0) invert(1) drop-shadow(0 2px 8px #23272f);
+}

@@ -1,0 +1,12 @@
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #23272f 0%, #23272f 60%, #23272f 100%);
+}
+.dashboard-main {
+  flex: 1;
+  margin-left: 220px;
+  padding: 0;
+  min-height: 100vh;
+  background: none;
+}
