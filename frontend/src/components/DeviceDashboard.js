@@ -16,7 +16,8 @@ function getPartnerFromName(name) {
   if (lower.includes('amd')) return 'AMD';
   if (lower.includes('intel')) return 'Intel';
   if (lower.includes('nvidia')) return 'Nvidia';
-  if (lower.includes('qualcomm') || lower.startsWith('qc')) return 'Qualcomm';
+  // Match 'qualcomm' or 'qc' (case-insensitive, anywhere in name)
+  if (lower.includes('qualcomm') || lower.includes('qc')) return 'Qualcomm';
   return 'Other';
 }
 

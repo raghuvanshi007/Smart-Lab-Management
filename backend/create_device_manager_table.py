@@ -26,5 +26,19 @@ def create_table():
         conn.commit()
     conn.close()
 
+def insert_new_devices():
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.executemany("""
+        INSERT INTO devices (name, status, message) VALUES (?, ?, ?)
+    """, [
+        ('NVIDIA-1', 'critical', 'device is not reachable'),
+        ('Intel-1', 'online', None),
+        ('QC-2', 'warning', 'device is not stable as cpu utilization is very high')
+    ])
+    conn.commit()
+    conn.close()
+
 if __name__ == '__main__':
     create_table()
+    insert_new_devices()
