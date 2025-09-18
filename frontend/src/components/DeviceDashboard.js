@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { FaServer, FaCheckCircle, FaExclamationTriangle, FaTimesCircle, FaSyncAlt } from 'react-icons/fa';
 import './DeviceDashboard.css';
@@ -9,35 +10,66 @@ const partnerLogos = [
   { name: 'Qualcomm', src: '/qualcomm-logo.png', className: 'partner-logo qualcomm-logo' }
 ];
 
-// Example device data mapped to partners
-const devicesByPartner = {
-  AMD: [
-    { id: 'A1', name: 'AMD Ryzen 9', status: 'Online' },
-    { id: 'A2', name: 'AMD Radeon Pro', status: 'Warning', msg: 'Temperature above threshold' },
-    { id: 'A3', name: 'AMD EPYC', status: 'Critical', msg: 'Device not responding' }
-  ],
-  Intel: [
-    { id: 'I1', name: 'Intel Core i9', status: 'Online' },
-    { id: 'I2', name: 'Intel Xeon', status: 'Online' }
-  ],
-  Nvidia: [
-    { id: 'N1', name: 'Nvidia RTX 4090', status: 'Online' },
-    { id: 'N2', name: 'Nvidia Jetson', status: 'Warning', msg: 'Low memory detected' }
-  ],
-  Qualcomm: [
-    { id: 'Q1', name: 'Qualcomm Snapdragon', status: 'Online' }
-  ]
-};
+function getPartnerFromName(name) {
+  if (!name) return 'Other';
+  const lower = name.toLowerCase();
+  if (lower.includes('amd')) return 'AMD';
+  if (lower.includes('intel')) return 'Intel';
+  if (lower.includes('nvidia')) return 'Nvidia';
+  if (lower.includes('qualcomm') || lower.startsWith('qc')) return 'Qualcomm';
+  return 'Other';
+}
 
-export default function DeviceDashboard({ stats, onRefresh }) {
+export default function DeviceDashboard() {
+  const [devices, setDevices] = React.useState([]);
+  const [summary, setSummary] = React.useState({ total: 0, online: 0, warning: 0, critical: 0 });
   const [selectedPartner, setSelectedPartner] = React.useState(null);
-  const [deviceFilter, setDeviceFilter] = React.useState(''); // '', 'total', 'online', 'warning', 'critical'
-  // Calculate device counts from all partners
-  const allDevices = Object.values(devicesByPartner).flat();
-  const totalDevices = allDevices.length;
-  const onlineDevices = allDevices.filter(d => d.status === 'Online').length;
-  const warningDevices = allDevices.filter(d => d.status === 'Warning').length;
-  const criticalDevices = allDevices.filter(d => d.status === 'Critical').length;
+  const [deviceFilter, setDeviceFilter] = React.useState('');
+  const [error, setError] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
+
+  // Fetch devices from backend
+  const fetchDevices = React.useCallback(() => {
+    setLoading(true);
+    setError(null);
+    fetch('/api/devices')
+      .then(res => {
+        if (!res.ok) throw new Error('API error');
+        return res.json();
+      })
+      .then(data => {
+        setDevices(data.devices.map(d => ({
+          ...d,
+          msg: d.message || ''
+        })));
+        setSummary(data.summary);
+        setLoading(false);
+      })
+      .catch(err => {
+        setError('Failed to load device data');
+        setLoading(false);
+      });
+  }, []);
+
+  React.useEffect(() => {
+    fetchDevices();
+  }, [fetchDevices]);
+
+  // Group devices by partner
+  const devicesByPartner = React.useMemo(() => {
+    const groups = { AMD: [], Intel: [], Nvidia: [], Qualcomm: [] };
+    devices.forEach(d => {
+      const partner = getPartnerFromName(d.name);
+      if (groups[partner]) groups[partner].push(d);
+    });
+    return groups;
+  }, [devices]);
+
+  const allDevices = devices;
+  const totalDevices = summary.total;
+  const onlineDevices = summary.online;
+  const warningDevices = summary.warning;
+  const criticalDevices = summary.critical;
 
   // Animation keyframes and classes
   const fadeInStyle = {
@@ -75,11 +107,12 @@ export default function DeviceDashboard({ stats, onRefresh }) {
           <h1>Device Management</h1>
           <p className="device-dashboard-subtitle">Monitor and manage all connected devices with AI-powered anomaly detection</p>
         </div>
-        <button className="device-dashboard-refresh" onClick={onRefresh}>
-          <FaSyncAlt className="refresh-icon" /> Refresh
+        <button className="device-dashboard-refresh" onClick={fetchDevices} disabled={loading}>
+          <FaSyncAlt className="refresh-icon" /> {loading ? 'Loading...' : 'Refresh'}
         </button>
       </div>
-      {/* ...existing code... */}
+      {error && <div style={{color:'#FF4F4F', fontWeight:700, margin:'18px 0'}}>{error}</div>}
+
       <div className="device-dashboard-cards">
         {[{
           title: 'Total Devices',
@@ -121,7 +154,6 @@ export default function DeviceDashboard({ stats, onRefresh }) {
         ))}
       </div>
 
-      {/* New section for AMD, Intel, Nvidia, Qualcomm */}
       <div className="dashboard-partner-sections" style={{display:'flex', justifyContent:'center', alignItems:'stretch', gap:'32px', margin:'40px auto', maxWidth:'900px'}}>
         {['AMD','Intel','Nvidia','Qualcomm'].map((partner, idx) => (
           <div key={partner} style={{
@@ -140,15 +172,13 @@ export default function DeviceDashboard({ stats, onRefresh }) {
             animationDelay: `${0.15 * idx}s`
           }} onClick={() => setSelectedPartner(partner)}>
             <img src={partnerLogos.find(l=>l.name===partner).src} alt={partner} style={{height:'48px', marginBottom:'18px'}} />
-            {/* Removed partner name under logo */}
             <div style={{color:'#bcee09', fontWeight:700, fontSize:'1.1em', marginBottom:'8px'}}>{devicesByPartner[partner]?.length || 0} Devices</div>
           </div>
         ))}
       </div>
 
-      {/* Device list for selected partner or filter (simple list, with status symbol and hover message for warning/critical) */}
       {(selectedPartner || deviceFilter) && (
-  <div style={{margin:'0 auto 32px auto', maxWidth:'520px', background:'rgba(44,62,80,0.08)', borderRadius:'16px', boxShadow:'0 2px 12px rgba(44,62,80,0.10)', padding:'24px 32px', textAlign:'left', ...fadeInStyle}}>
+        <div style={{margin:'0 auto 32px auto', maxWidth:'520px', background:'rgba(44,62,80,0.08)', borderRadius:'16px', boxShadow:'0 2px 12px rgba(44,62,80,0.10)', padding:'24px 32px', textAlign:'left', ...fadeInStyle}}>
           <h3 style={{color:'#4F8DFD', fontWeight:800, fontSize:'1.3em', marginBottom:'18px', textShadow:'0 2px 8px #23272f'}}>
             {selectedPartner ? `${selectedPartner} Devices` : deviceFilter === 'total' ? 'All Devices' : deviceFilter.charAt(0).toUpperCase() + deviceFilter.slice(1) + ' Devices'}
           </h3>
