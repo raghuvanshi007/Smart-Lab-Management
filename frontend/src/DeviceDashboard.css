@@ -1,0 +1,25 @@
+/* Device status colors for dashboard */
+.device-status-online {
+  color: #bcee09 !important;
+  font-weight: 900;
+  text-shadow: 0 0 2px #23272f, 0 0 12px #bcee09;
+  background: none !important;
+  letter-spacing: 1px;
+  font-size: 1.15em;
+}
+.device-status-warning {
+  color: #FF9800 !important;
+  font-weight: 900;
+  text-shadow: 0 0 2px #23272f, 0 0 12px #FF9800;
+  background: none !important;
+  letter-spacing: 1px;
+  font-size: 1.15em;
+}
+.device-status-critical {
+  color: #FF2D2D !important;
+  font-weight: 900;
+  text-shadow: 0 0 2px #23272f, 0 0 12px #FF2D2D;
+  background: none !important;
+  letter-spacing: 1px;
+  font-size: 1.15em;
+}

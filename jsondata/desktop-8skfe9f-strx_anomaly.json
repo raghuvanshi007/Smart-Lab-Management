@@ -1,0 +1,44 @@
+[
+  {
+    "timestamp": "2025-09-18T18:38:13.568915",
+    "epoch_timestamp": 1758200893.5689206,
+    "detector": "LSTM, RF",
+    "confidence": 1.0,
+    "lstm_confidence": 1.0,
+    "rf_confidence": 0.6413929998394425,
+    "lstm_error": 21804.4765625,
+    "system_metrics": {
+      "cpu_percent": 15.9,
+      "ram_percent": 70.5,
+      "disk_percent": 37.8,
+      "memory_usage_gb": 22.311424255371094,
+      "temperature": 32.95,
+      "disk_io_rate": 0.010637046600811996,
+      "network_io_rate": 0.0006619220979597084,
+      "process_count": 456,
+      "system_load": 0.184,
+      "response_time": 22.0,
+      "cpu_freq_mhz": 1400.0,
+      "memory_available_gb": 9.328125,
+      "disk_free_gb": 592.2399826049805
+    },
+    "feature_vector": [
+      15.9,
+      70.5,
+      37.8,
+      22.311424255371094,
+      32.95,
+      0.010637046600811996,
+      0.0006619220979597084,
+      456,
+      0.184,
+      22.0
+    ],
+    "anomaly_sources": [
+      "LSTM",
+      "RF"
+    ],
+    "system_state": "service_degradation",
+    "severity": "MEDIUM"
+  }
+]

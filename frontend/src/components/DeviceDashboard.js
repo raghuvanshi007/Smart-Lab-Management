@@ -10,13 +10,22 @@ const partnerLogos = [
   { name: 'Qualcomm', src: '/qualcomm-logo.png', className: 'partner-logo qualcomm-logo' }
 ];
 
-function getPartnerFromName(name) {
-  if (!name) return 'Other';
-  const lower = name.toLowerCase();
+
+function getPartnerFromDevice(device) {
+  // Prefer backend 'partner' field if present
+  if (device.partner) {
+    const p = device.partner.toLowerCase();
+    if (p === 'amd') return 'AMD';
+    if (p === 'intel') return 'Intel';
+    if (p === 'nvidia') return 'Nvidia';
+    if (p === 'qualcomm') return 'Qualcomm';
+  }
+  // Fallback to name-based logic
+  if (!device.name) return 'Other';
+  const lower = device.name.toLowerCase();
   if (lower.includes('amd')) return 'AMD';
   if (lower.includes('intel')) return 'Intel';
   if (lower.includes('nvidia')) return 'Nvidia';
-  // Match 'qualcomm' or 'qc' (case-insensitive, anywhere in name)
   if (lower.includes('qualcomm') || lower.includes('qc')) return 'Qualcomm';
   return 'Other';
 }
@@ -60,7 +69,7 @@ export default function DeviceDashboard() {
   const devicesByPartner = React.useMemo(() => {
     const groups = { AMD: [], Intel: [], Nvidia: [], Qualcomm: [] };
     devices.forEach(d => {
-      const partner = getPartnerFromName(d.name);
+      const partner = getPartnerFromDevice(d);
       if (groups[partner]) groups[partner].push(d);
     });
     return groups;
@@ -198,8 +207,18 @@ export default function DeviceDashboard() {
                 <li key={device.id} style={{marginBottom:'12px', padding:'10px 18px', background:'#fff', borderRadius:'10px', boxShadow:'0 2px 8px rgba(44,62,80,0.08)', display:'flex', alignItems:'center', justifyContent:'space-between', ...fadeInStyle, animationDelay: `${0.1 * idx}s`}}>
                   <span style={{fontWeight:600, color:'#23272f'}}>{device.name}</span>
                   <span
-                    style={{fontWeight:600, color: device.status === 'Online' ? '#bcee09' : device.status === 'Warning' ? '#FFD600' : '#FF4F4F', cursor: device.status !== 'Online' ? 'pointer' : 'default', position:'relative', display:'flex', alignItems:'center'}}
-                    title={device.status !== 'Online' && device.msg ? device.msg : ''}
+                    style={{
+                      fontWeight:800,
+                      color:
+                        device.status && device.status.toLowerCase() === 'online' ? '#bcee09' :
+                        device.status && device.status.toLowerCase() === 'warning' ? '#FFD600' :
+                        device.status && device.status.toLowerCase() === 'critical' ? '#FF4F4F' : '#23272f',
+                      cursor: device.status && device.status.toLowerCase() !== 'online' ? 'pointer' : 'default',
+                      position:'relative',
+                      display:'flex',
+                      alignItems:'center'
+                    }}
+                    title={device.status && device.status.toLowerCase() !== 'online' && device.msg ? device.msg : ''}
                   >
                     {statusIcon}
                     {device.status}
