@@ -74,7 +74,10 @@ export default function LandingDashboard() {
   const [activeIndex, setActiveIndex] = React.useState([-1, -1, -1, -1]);
   return (
     <div className="landing-dashboard">
-      <div className="dashboard-header animated-fadein">
+  <div className="floating-shape shape1"></div>
+  <div className="floating-shape shape2"></div>
+  <div className="floating-shape shape3"></div>
+  <div className="dashboard-header animated-fadein">
         <div className="landing-logo-block">
           <svg className="landing-logo" width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg" style={{marginRight: '20px'}}>
             <rect x="2" y="2" width="22" height="22" fill="#fff"/>
@@ -86,7 +89,7 @@ export default function LandingDashboard() {
         </div>
         {/* Partner logos moved below subtitle */}
   <p className="landing-subtitle animated-subtitle" style={{textAlign: 'center', marginBottom: '50px'}}>A Unified Agentic Device Manager across AMD, Intel, Nvidia, Qualcomm</p>
-  <div className="partner-logos-collage" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '30px 310px 40px 0'}}>
+  <div className="partner-logos-collage" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '60px 200px 60px 0'}}>
           {partnerLogos.map((logo, idx) => (
             <img
               key={logo.name}
@@ -94,9 +97,9 @@ export default function LandingDashboard() {
               alt={logo.name}
               className={logo.className + ' collage-logo'}
               style={{
-                height: '55px',
+                height: '80px',
                 width: 'auto',
-                marginLeft: idx === 0 ? '0px' : '16px',
+                marginLeft: idx === 0 ? '0px' : '20px',
                 marginRight: '0px',
                 verticalAlign: 'middle',
                 boxShadow: '0 2px 24px 0 #4F8DFD, 0 2px 12px rgba(44,62,80,0.12)', // Add glow
@@ -113,9 +116,7 @@ export default function LandingDashboard() {
             />
           ))}
         </div>
-        <button className="dashboard-enter-btn animated-btn" style={{marginTop: '32px'}} onClick={() => navigate('/dashboard')}>
-          Enter Dashboard
-        </button>
+        {/* Removed Enter Dashboard button as requested */}
       </div>
   {/* Removed Report section/title as requested */}
       <div className="dashboard-grid">
@@ -193,13 +194,13 @@ export default function LandingDashboard() {
           </div>
         </div>
         {/* DASHBOARD STATUS */}
-        <div className="dashboard-card animated-card chart-fadein" style={{animationDelay: '0.7s'}}>
+        <div className="dashboard-card animated-card chart-fadein" style={{animationDelay: '0.7s', cursor: 'pointer'}} onClick={() => navigate('/dashboard')}>
           <div className="card-title" style={{display:'flex', alignItems:'center'}}>{cardIcons[1]}DASHBOARD STATUS</div>
           <div style={{padding:'32px', textAlign:'center', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
             {/* Elegant animated bar chart for device status */}
             <BarChart
-              width={360}
-              height={220}
+              width={260}
+              height={150}
               data={[
                 { name: 'Total', value: 80 },
                 { name: 'Online', value: 45 },

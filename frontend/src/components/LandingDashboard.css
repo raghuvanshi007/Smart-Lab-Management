@@ -1,3 +1,17 @@
+.landing-dashboard .floating-shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.32;
+  filter: blur(8px) brightness(1.2);
+  z-index: 1;
+  animation: floatShape 12s ease-in-out infinite alternate;
+}
+
+@keyframes floatShape {
+  0% { transform: translateY(0) scale(1) rotate(0deg); }
+  50% { transform: translateY(-32px) scale(1.08) rotate(12deg); }
+  100% { transform: translateY(0) scale(1) rotate(0deg); }
+}
 .animated-fadein {
   animation: fadeInUp 0.8s cubic-bezier(.68,-0.55,.27,1.55) both;
 }
@@ -87,16 +101,74 @@
   z-index: 2;
 }
 .landing-dashboard {
-  background: #0a1622;
+  position: relative;
+  background: linear-gradient(135deg, #23272f 0%, #101a2b 100%);
   color: #f7fafc;
   min-height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  padding: 48px 0;
+  padding: 16px 0 0 0;
   font-family: 'Segoe UI', Arial, sans-serif;
+  overflow: hidden;
+}
+
+.landing-dashboard::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120vw;
+  height: 120vh;
+  background:
+    radial-gradient(circle at 20% 30%, #4F8DFD 0%, transparent 60%),
+    radial-gradient(circle at 80% 70%, #2DE3A7 0%, transparent 60%),
+    radial-gradient(circle at 50% 90%, #FFD600 0%, transparent 70%),
+    linear-gradient(120deg, rgba(44,62,80,0.18) 0%, rgba(16,26,43,0.12) 100%);
+  opacity: 0.22;
+  filter: blur(32px);
+  z-index: 0;
+  animation: bgMove 16s linear infinite alternate;
+}
+.landing-dashboard .floating-shape.shape1 {
+  top: 12%;
+  left: 8%;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, #4F8DFD 0%, #23272f 80%);
+  box-shadow: 0 0 48px 8px #4F8DFD;
+  animation-delay: 0s;
+}
+.landing-dashboard .floating-shape.shape2 {
+  top: 68%;
+  left: 72%;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, #2DE3A7 0%, #101a2b 80%);
+  box-shadow: 0 0 32px 4px #2DE3A7;
+  animation-delay: 2s;
+}
+.landing-dashboard .floating-shape.shape3 {
+  top: 80%;
+  left: 18%;
+  width: 110px;
+  height: 110px;
+  background: radial-gradient(circle, #FFD600 0%, #23272f 80%);
+  box-shadow: 0 0 24px 2px #FFD600;
+  animation-delay: 4s;
+}
+
+@keyframes bgMove {
+  0% { transform: scale(1) translateY(0) translateX(0); }
+  100% { transform: scale(1.04) translateY(24px) translateX(-24px); }
+}
+
+.landing-dashboard .dashboard-header,
+.landing-dashboard .dashboard-grid {
+  position: relative;
+  z-index: 2;
 }
 .landing-logo-block {
   display: flex;
@@ -176,7 +248,7 @@
 .amd-logo {
   background: none;
   filter: none;
-  height: 48px;
+  height: 55px;
   width: auto;
   object-fit: contain;
   display: inline-block;
@@ -187,48 +259,68 @@
 .nvidia-logo {
   background: #bcee09;
   border-radius: 4px;
-  padding: 2px 8px;
-  height: 32px !important;
+  padding: 8px 15px;
+  height: 60px !important;
 }
 .qualcomm-logo {
   filter: none;
 }
+/* Reduce grid size for better fit */
 .dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 32px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  gap: 8px;
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 10 auto;
 }
+/* Reduce card size and padding */
 .dashboard-card {
-  background: #101a2b;
-  border-radius: 18px;
-  box-shadow: 0 2px 12px rgba(44,62,80,0.10);
+  background: rgba(16,26,43,0.7);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(44,62,80,0.18), 0 2px 12px rgba(44,62,80,0.10);
   padding: 32px 28px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-height: 180px;
-  border: 1px solid #23272f;
+  min-width: 260px;
+  min-height: 220px;
+  border: 2px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(12px);
+  transition: box-shadow 0.3s, transform 0.3s, border 0.3s;
+  position: relative;
+  overflow: hidden;
+  margin-top: 80px;
+  margin-left: 0px;
+}
+.dashboard-card:hover {
+  box-shadow: 0 12px 48px #4F8DFD, 0 2px 12px rgba(44,62,80,0.18);
+  border: 2px solid #4F8DFD;
+  transform: scale(1.04) translateY(-4px);
+}
+.dashboard-card::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: -40%;
+  width: 180%;
+  height: 180%;
+  background: linear-gradient(120deg, #4F8DFD 0%, #2DE3A7 100%);
+  opacity: 0.12;
+  filter: blur(32px);
+  z-index: 0;
 }
 .card-title {
-  font-size: 1.2em;
-
-  .partner-logos-side-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 24px;
-    position: absolute;
-    top: 40px;
-    right: 40px;
-    z-index: 2;
-  }
+  font-size: 1.25em;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px #23272f;
+  margin-bottom: 12px;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  height: 120px;
+  z-index: 1;
 }
 .pie-label {
   position: absolute;
