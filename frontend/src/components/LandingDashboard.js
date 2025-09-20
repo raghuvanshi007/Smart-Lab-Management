@@ -300,24 +300,26 @@ export default function LandingDashboard() {
         </div>
         {/* SYSTEM HEALTH & AVAILABILITY */}
         <div className="dashboard-card animated-card chart-fadein" style={{animationDelay: '1.1s'}}>
-          <div className="card-title" style={{display:'flex', alignItems:'center'}}>{cardIcons[3]}SYSTEM HEALTH & AVAILABILITY</div>
-            <div style={{padding:'32px', textAlign:'center', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
-              <AreaChart width={340} height={210} data={[
-                { name: '10:00', health: 95, available: 90, alerts: 2 },
-                { name: '10:10', health: 92, available: 88, alerts: 3 },
-                { name: '10:20', health: 97, available: 93, alerts: 1 },
-                { name: '10:30', health: 93, available: 89, alerts: 4 },
-                { name: '10:40', health: 96, available: 92, alerts: 2 },
-                { name: '10:50', health: 94, available: 90, alerts: 3 }
-              ]} style={{background: 'rgba(44,62,80,0.08)', borderRadius: '18px', boxShadow: '0 4px 24px rgba(44,62,80,0.10)'}}>
-                <XAxis dataKey="name" stroke="#00A4EF" fontSize={14} tick={{fill:'#00A4EF', fontWeight:600}} axisLine={false} tickLine={false} />
-                <YAxis stroke="#00A4EF" fontSize={14} tick={{fill:'#00A4EF', fontWeight:600}} axisLine={false} tickLine={false} />
-                <Tooltip contentStyle={{background:'#23272f', color:'#00A4EF', borderRadius:'12px', fontWeight:600, fontSize:'1em', border:'none', boxShadow:'0 2px 12px #000'}} />
-                <Area type="monotone" dataKey="health" stroke="#2DE3A7" strokeWidth={3} fill="#2DE3A7" fillOpacity={0.18} activeDot={{ r: 7 }} isAnimationActive={true} animationDuration={1200} name="Health" />
-                <Area type="monotone" dataKey="available" stroke="#4F8DFD" strokeWidth={3} fill="#4F8DFD" fillOpacity={0.18} activeDot={{ r: 7 }} isAnimationActive={true} animationDuration={1200} name="Available" />
-                <Area type="monotone" dataKey="alerts" stroke="#FFD600" strokeWidth={3} fill="#FFD600" fillOpacity={0.18} activeDot={{ r: 7 }} isAnimationActive={true} animationDuration={1200} name="Alerts" />
-              </AreaChart>
-              <span style={{marginTop:'16px', color:'#00A4EF', fontWeight:600, fontSize:'1em', letterSpacing:'1px', textShadow:'0 2px 8px #23272f'}}>Live system health, device availability, and alerts</span>
+            <div className="dashboard-card animated-card chart-fadein" style={{animationDelay: '1.1s', cursor: 'pointer'}} onClick={() => navigate('/health')}>
+              <div className="card-title" style={{display:'flex', alignItems:'center'}}>{cardIcons[3]}SYSTEM HEALTH & AVAILABILITY</div>
+                <div style={{padding:'32px', textAlign:'center', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
+                  <AreaChart width={340} height={210} data={[
+                    { name: '10:00', health: 95, available: 90, alerts: 2 },
+                    { name: '10:10', health: 92, available: 88, alerts: 3 },
+                    { name: '10:20', health: 97, available: 93, alerts: 1 },
+                    { name: '10:30', health: 93, available: 89, alerts: 4 },
+                    { name: '10:40', health: 96, available: 92, alerts: 2 },
+                    { name: '10:50', health: 94, available: 90, alerts: 3 }
+                  ]} style={{background: 'rgba(44,62,80,0.08)', borderRadius: '18px', boxShadow: '0 4px 24px rgba(44,62,80,0.10)'}}>
+                    <XAxis dataKey="name" stroke="#00A4EF" fontSize={14} tick={{fill:'#00A4EF', fontWeight:600}} axisLine={false} tickLine={false} />
+                    <YAxis stroke="#00A4EF" fontSize={14} tick={{fill:'#00A4EF', fontWeight:600}} axisLine={false} tickLine={false} />
+                    <Tooltip contentStyle={{background:'#23272f', color:'#00A4EF', borderRadius:'12px', fontWeight:600, fontSize:'1em', border:'none', boxShadow:'0 2px 12px #000'}} />
+                    <Area type="monotone" dataKey="health" stroke="#2DE3A7" strokeWidth={3} fill="#2DE3A7" fillOpacity={0.18} activeDot={{ r: 7 }} isAnimationActive={true} animationDuration={1200} name="Health" />
+                    <Area type="monotone" dataKey="available" stroke="#4F8DFD" strokeWidth={3} fill="#4F8DFD" fillOpacity={0.18} activeDot={{ r: 7 }} isAnimationActive={true} animationDuration={1200} name="Available" />
+                    <Area type="monotone" dataKey="alerts" stroke="#FFD600" strokeWidth={3} fill="#FFD600" fillOpacity={0.18} activeDot={{ r: 7 }} isAnimationActive={true} animationDuration={1200} name="Alerts" />
+                  </AreaChart>
+                  <span style={{marginTop:'16px', color:'#00A4EF', fontWeight:600, fontSize:'1em', letterSpacing:'1px', textShadow:'0 2px 8px #23272f'}}>Live system health, device availability, and alerts</span>
+                </div>
             </div>
         </div>
       </div>
